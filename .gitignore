@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 敏感配置（workspace 内部数据）
+.openclaw/
+
+# 日志
+*.log
+
+# 大文件
+model.safetensors
+*.mp3
+*.wav
+oa_dashboard.png
+test_image.png
+xiaobai_avatar.png
+
+# 临时文件
+inbox/upload_server.log
+inbox/upload_server.pid
+inbox/upload.html
+inbox/.qq_sync_marker
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
