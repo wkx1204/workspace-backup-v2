@@ -146,7 +146,7 @@ curl -X POST https://open.bigmodel.cn/api/paas/v4/chat/completions   -H "Authori
 
 | 仓库 | 内容 | GitHub |
 |------|------|--------|
-| workspace-backup | workspace-main 全部文件（排除 .openclaw/和大文件） | github.com/wkx1204/workspace-backup |
+| workspace-backup | workspace-main 全部文件（排除 .openclaw/和大文件） | github.com/wkx1204/workspace-backup-v2 |
 | obsidian-backup | Obsidian Vault 全部笔记（排除 .DS_Store） | github.com/wkx1204/obsidian-backup |
 | xiaobai-homepage | 小白主页静态站 | github.com/wkx1204/xiaobai-homepage |
 
