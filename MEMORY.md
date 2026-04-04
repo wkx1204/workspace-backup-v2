@@ -172,6 +172,13 @@ curl -X POST https://open.bigmodel.cn/api/paas/v4/chat/completions   -H "Authori
 
 ---
 
+## 任务执行规则
+- **优先用 subagent**：复杂任务分配给 subagent 执行，不阻塞主会话
+- **自己动手**：仅限简单命令（ls/cat/echo/grep等）
+- **理由**：subagent 可并行处理，效率更高
+
+---
+
 ## 记忆管理层
 
 ### 分层存储

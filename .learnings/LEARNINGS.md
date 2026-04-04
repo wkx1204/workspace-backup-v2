@@ -60,3 +60,9 @@
 - image tool (PiCodingAgent.ModelRegistry) 底层有 bug，模型无法识别，配置改不对
 - 正确做法：直接调 POST https://open.bigmodel.cn/api/paas/v4/chat/completions，glm-4.6v-flashx
 - 教训：MEMORY.md 里有明确方法的 → 直接用，不要绕路修工具
+
+## 任务执行风格（2026-04-04）
+- **老板要求**：以后任务尽量分配给 subagent，不要自己动手，除非是很简单的任务
+- **原因**：subagent 可以并行处理，不阻塞主会话，执行更快
+- **适用场景**：清理脚本、批量文件操作、搜索研究、多分支任务
+- **例外**：简单命令（ls/cat/echo/grep等）可以直接执行
