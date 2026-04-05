@@ -12,6 +12,10 @@
     "ralph-loop-agent": {
       "version": "1.1.0",
       "installedAt": 1774494736956
+    },
+    "hot-topics": {
+      "version": "1.1.0",
+      "installedAt": 1775364851852
     }
   }
 }

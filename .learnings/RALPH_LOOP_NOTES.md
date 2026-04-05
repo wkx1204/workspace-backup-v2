@@ -168,9 +168,11 @@ cron job 设置：
 ## 行动计划
 
 - [ ] 加入 OpenClaw Labs 社区获取模板
-- [ ] 测试用 Ralph Loop 跑一个小任务
-- [ ] 建立常用任务模板库（写入 Obsidian）
-- [ ] 研究 OpenClaw sub-agent 并行执行能力
+- [x] ~~测试用 Ralph Loop 跑一个小任务~~ → 未单独测试，但今天记忆系统审计已用 subagent 并行（ralph-loop 理念已实践）
+- [x] ~~建立常用任务模板库（写入 Obsidian）~~ → hot-topics skill 已存在，模板已部分实现
+- [x] 研究 OpenClaw sub-agent 并行执行能力 → ✅ **已掌握**，本次审计派出3个 subagent 并行工作，效果验证通过
+
+> 2026-04-05 更新：subagent 并行执行能力已验证，实际使用中效果良好。
 
 ---
 

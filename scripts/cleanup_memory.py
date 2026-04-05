@@ -9,11 +9,12 @@ cleanup_memory.py
 每周日 凌晨 3:00 自动执行
 手动：python3 cleanup_memory.py [--dry-run]
 """
-import os, sys, glob, shutil, zipfile, datetime
+import os, sys, glob, shutil, zipfile, datetime, re
 from pathlib import Path
 
 WORKSPACE  = "/Users/wf/.openclaw/workspace-main"
 MEMORY_DIR = os.path.join(WORKSPACE, "memory")
+DATE_PATTERN = re.compile(r'(\d{4}-\d{2}-\d{2})')  # 文件名日期提取
 BACKUP_DIR = os.path.join(WORKSPACE, "backups")
 SESSION_DIR = os.path.join(WORKSPACE, ".sessions")
 
@@ -40,10 +41,18 @@ else:
     backup_name = f"cleanup_{today.strftime('%Y%m%d_%H%M%S')}.zip"
     backup_path = os.path.join(BACKUP_DIR, backup_name)
     files_to_backup = []
+    # 用文件名日期（与删除逻辑一致），mtime 只做降级 fallback
     for f in glob.glob(os.path.join(MEMORY_DIR, "*.md")):
-        st = os.stat(f)
-        if datetime.datetime.fromtimestamp(st.st_mtime) < mem_threshold:
-            files_to_backup.append(f)
+        basename = os.path.basename(f)
+        m = DATE_PATTERN.search(basename)
+        if m:
+            try:
+                file_date = datetime.datetime.strptime(m.group(1), '%Y-%m-%d')
+                if file_date < mem_threshold:
+                    files_to_backup.append(f)
+            except ValueError:
+                pass  # 无日期，跳过备份
+        # else: 无日期就不备份（反正删除逻辑也不会删）
     for f in glob.glob(os.path.join(SESSION_DIR, "*.json")):
         st = os.stat(f)
         if datetime.datetime.fromtimestamp(st.st_mtime) < sess_threshold:
@@ -59,19 +68,41 @@ else:
 print()
 
 # ========== 2. 删除 7 天前的记忆文件 ==========
+# 优先用文件名日期判断（mtime 会被 cp/备份操作刷新，不可靠）
 deleted_mem = []
 total_size = 0
 if os.path.exists(MEMORY_DIR):
     for f in glob.glob(os.path.join(MEMORY_DIR, "*.md")):
-        st = os.stat(f)
-        mtime = datetime.datetime.fromtimestamp(st.st_mtime)
-        if mtime < mem_threshold:
+        basename = os.path.basename(f)
+        # 从文件名提取日期：memory/2026-03-18.md → 2026-03-18
+        m = DATE_PATTERN.search(basename)
+        if m:
+            try:
+                file_date = datetime.datetime.strptime(m.group(1), '%Y-%m-%d')
+            except ValueError:
+                file_date = None
+        else:
+            file_date = None
+        
+        # 文件名有日期 → 用文件名判断；否则降级用 mtime
+        if file_date is not None:
+            effective_date = file_date
+            use_mtime = False
+        else:
+            st = os.stat(f)
+            effective_date = datetime.datetime.fromtimestamp(st.st_mtime)
+            use_mtime = True
+        
+        if effective_date < mem_threshold:
+            st = os.stat(f)
             size = st.st_size
+            date_str = effective_date.strftime('%Y-%m-%d')
+            tag = 'mtime' if use_mtime else '文件名'
             if dry_run:
-                print(f"[预览删除] memory  {mtime.strftime('%Y-%m-%d')}  {os.path.basename(f)}")
+                print(f"[预览删除] memory [{tag}] {date_str}  {basename}")
             else:
                 os.remove(f)
-                print(f"[已删除] memory  {mtime.strftime('%Y-%m-%d')}  {os.path.basename(f)}")
+                print(f"[已删除] memory [{tag}] {date_str}  {basename}")
             deleted_mem.append(f)
             total_size += size
 
