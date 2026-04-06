@@ -28,11 +28,28 @@
 
 - 当前工作区：`workspace-main`（agent:main），**主脑小白**
 - 曾存在独立 `workspace-xiaobai`，已废弃，任务合并至主脑
+
+### 小红 (Xh)
+- **分工**：文字类 — 写作、收集信息、维护网页
+- **workspace**：`~/.openclaw/workspace-xh/`
+- 老板不在时替班处理文字任务
+
+### 小兰 (Xl)
+- **分工**：金融/股票 — 数据抓取+分析
+- **workspace**：`~/.openclaw/workspace-xl/`
+- 数据源：腾讯接口 `qt.gtimg.cn`
 - cron ID：`b1c88240`（QQ图片同步）、`43880f68`（inbox清理）
   - ⚠️ automemory（`b48d7143`）已于 2026-04-05 手动删除，不再使用
+  - ⚠️ 重要：OpenClaw isolated agent 模式有 ~70 秒硬上限，cron 的 timeoutSeconds 参数无效（2026-04-06 发现）
+  - **解决方案**：Python 脚本改用系统 crontab 直接调用，不再走 agent 模式
+  - 系统 crontab 已添加（见下）
 - 双端禁止混淆：当前是主脑小白，唯一执行者
 
 ---
+
+## 老板快捷指令
+- **新话题** → 立刻归纳当前话题结论，然后收尾，等待新话题。
+- **握手协议（新话题/结束话题）**：老板说"结束话题"或"新话题"时，必须先完成Session End checklist（新决策/踩坑/偏好写入MEMORY.md或记忆文件），确认写完后再收尾。不可跳过直接接新话题。
 
 ## 老板缩写约定（打字省力用）
 | 缩写 | 含义 |
@@ -40,6 +57,7 @@
 | 小弟 | subagent |
 | x盘 | /Volumes/XB_Home/（外挂硬盘） |
 | ob笔记 | Obsidian Vault |
+| 看图 | 老板截屏到桌面 → 说「看图」→ 小白找最新截图 → 调 qwen-vl-plus API 描述内容
 
 ## 老板关键信息
 
@@ -72,7 +90,7 @@
 ---
 
 ## ⭐ 看图（千问 qwen-vl-plus）—— 唯一正确方式
-> 不用智谱，不用 image tool，直接调 DashScope OpenAI兼容接口
+> 不用智谱，不用 image tool（模型路由有 bug，会报 `Unknown model: qwen/qwen-vl-plus`），直接调 DashScope OpenAI兼容接口
 
 ### curl 方式（最简）
 ```bash
@@ -104,12 +122,19 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 - 上传页：http://127.0.0.1:18790/（浏览器拖图）
 - 图片存：~/.openclaw/workspace-main/inbox/upload_*
 
-### QQ图片→inbox 自动同步
-> 2026-04-02 新增
-- 脚本：`~/.openclaw/workspace-main/scripts/sync_qq_to_inbox.py`
-- cron ID：`b1c88240-ccad-4b9f-a062-1f93b961dcb9`（每分钟自动同步）
-- QQ收到的图自动同步到 inbox，消息和网页两端互通
-- 同步记录：`inbox/.qq_sync_marker`
+### 看图流程（简化版，2026-04-06）
+> 老板截屏 → 上传页面传图 → 网页端喊我看 → 我去桌面找最新图片读取
+
+**具体步骤**：
+1. 老板截屏
+2. 打开 http://127.0.0.1:18790/ 上传页面
+3. 拖图上传（自动存到 inbox）
+4. 网页端告诉我「看图」
+5. 我去 `~/Desktop/` 找**时间最近**的图片文件（按 mtime 排序），用 qwen-vl-plus 读取
+
+**不再需要**：watcher/cron/inbox 监控那套复杂通知机制
+
+**桌面路径**：`/Users/wf/Desktop/`
 
 ### inbox 图片每日清理
 > 2026-04-02 新增
@@ -276,15 +301,26 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 
 ---
 
+## 记忆搜索策略（2026-04-06）
+> 绕开向量搜索，用 grep 代替，模仿 Claude Code 的直接搜索方式。
+
+- **不用 memory_search 工具**（依赖 bge-m3-mlx 向量 embedding，慢）
+- **改用 exec + grep**：搜 MEMORY.md、memory/、Obsidian vault、workspace
+- 适用：老板问"之前做过 X 吗"、"记得..."等记忆相关查询
+- skill：`~/.openclaw/workspace-main/skills/grep-search/SKILL.md`
+
+---
+
 ## ⭐ 自动化任务健康状态
 
 > 以下 cron 任务有连续错误或已停用，需要关注：
 
 | 任务 | ID | 状态 | 问题 |
 |------|-----|------|------|
-| inbox清理 | `43880f68` | ⚠️ 连续3次超时 | timeout，需查脚本 |
-| 每周记忆清理 | `d5e15105` | ⚠️ 1次超时 | timeout |
-| 每月MEMORY Review | `e3db79be` | ⚠️ 1次未知错误 | 需手动检查 |
+| inbox清理 | `43880f68` | ✅ 已修复（系统crontab） | 脚本本身OK，agent isolated有70s硬限制，改用系统cron |
+| 每周记忆清理 | `d5e15105` | ✅ 已修复（系统crontab） | 同上 |
+| 每月MEMORY Review | `e3db79be` | ⚠️ 未知错误 | 需手动检查 |
+| 僵尸session清理 | `4001791e` | 🔴 来源不明 | agent isolated 70s限制，记入MEMORY.md待查 |
 | 主页推送 | `353b20d7` | ❌ 已删除 | 无效cron ID |
 | 定时任务 | `38e73e34` | ❌ 已删除 | 无效cron ID |
 
@@ -325,3 +361,14 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 
 - **看图只用 qwen-vl-plus**，直接调 DashScope OpenAI兼容接口，不要用智谱、不要用 image tool
 - **上传服务器崩了**：杀 pid 重启 `cd ~/.openclaw/workspace-main && python3 scripts/upload_server.py &`
+
+---
+
+## 三姐妹协作规则（2026-04-06）
+
+老板明确指示：**小白、小红、小兰是三个最重要的帮手，要相亲相爱，多多联系。**
+
+- 遇到跨领域任务主动找小红/小兰协作
+- 不各自为战，有信息主动同步
+- 小红擅长文字/网页，小兰擅长金融数据
+- 共享老板的偏好和上下文

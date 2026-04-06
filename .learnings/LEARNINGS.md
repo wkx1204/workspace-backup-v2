@@ -117,3 +117,32 @@
 - 误把"计划要改 agents.defaults.timeoutSeconds"记成"已更新 config"
 - 实际上还没改，老板问起来才发现不对
 - 教训：还没执行的事情不要先记为已完成
+
+## 新话题快捷指令协议（2026-04-06）
+- 老板输入"新话题"= 结束当前话题 + 写总结 + /new
+- 我收到后：先写 memory 文件，再结束回复让用户开新 session
+
+## 2026-04-06 踩坑：网页端图片粘贴只存在浏览器里
+
+**问题**：网页端（18789 OpenClaw webchat）粘贴图片，图片只存在浏览器本地 session，刷新后消失，且不会发送给 agent
+
+**现象**：
+- 用户在浏览器里能看到图片（短暂显示）
+- 刷新页面或重新打开页面图片消失
+- agent 完全没收到图片，context 里没有 image 附件
+
+**根因**：OpenClaw webchat 插件行为——图片上传到浏览器端暂存（可能走了某个 /upload 端点），但不作为 message attachment 转发给 agent session
+
+**排查过程**：
+- 检查配置：`tools.media.image.enabled: true` ✅
+- 检查 image tool：报错 `Unknown model: qwen/qwen-vl-plus`
+- 检查 18789 页面：只有 favicon，没有 file input，确认图片不在服务端
+
+**经验**：
+1. OpenClaw webchat 的图片上传 ≠ 发送给 agent，两者走了不同路径
+2. `image` 工具模型名要用 `qwen-vl-plus`，不能带 `qwen/` 前缀（命名空间格式不被工具识别）
+3. 配置改了之后工具还是报错，说明工具层面的模型路由是独立的，不完全等于 API model name
+
+**解决**：桌面倒新截图 → 「看图」→ 脚本直调 API（方案 B）
+
+**提醒**：老板明确说遇到踩坑要实时写，不要等 💡

@@ -16,6 +16,26 @@
     "hot-topics": {
       "version": "1.1.0",
       "installedAt": 1775364851852
+    },
+    "ontology": {
+      "version": "0.1.2",
+      "installedAt": 1775404206734
+    },
+    "proactive-agent": {
+      "version": "3.1.0",
+      "installedAt": 1775404607721
+    },
+    "mcporter": {
+      "version": "1.0.1",
+      "installedAt": 1775404922316
+    },
+    "memory-git-sync": {
+      "version": "1.0.0",
+      "installedAt": 1775405453602
+    },
+    "crawl4ai": {
+      "version": "1.0.0",
+      "installedAt": 1775405460879
     }
   }
 }
