@@ -1,0 +1,40 @@
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  const errors = [];
+  page.on('pageerror', err => errors.push('PAGE ERROR: ' + err.message));
+  page.on('console', msg => { if (msg.type() === 'error') errors.push('CONSOLE ERROR: ' + msg.text()); });
+  await page.goto('file:///Users/wf/.openclaw/workspace-xh/xiangqi.html');
+  await page.waitForTimeout(1000);
+  const canvasInfo = await page.evaluate(() => {
+    const canvas = document.getElementById('board');
+    if (!canvas) return { error: 'no canvas' };
+    const ctx = canvas.getContext('2d');
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let nonZero = 0;
+    for (let i = 0; i < data.length; i += 4) { if (data[i] !== 0 || data[i+1] !== 0 || data[i+2] !== 0) nonZero++; }
+    return { width: canvas.width, height: canvas.height, nonZeroPixels: nonZero };
+  });
+  const status = await page.evaluate(() => document.getElementById('status').textContent);
+  console.log('Canvas:', JSON.stringify(canvasInfo));
+  console.log('Initial status:', status);
+  const canvas = await page.$('#board');
+  const box = await canvas.boundingBox();
+  const CELL = 56, PADDING = 28;
+  const px = box.x + PADDING + 4 * CELL + CELL/2;
+  const py = box.y + PADDING + 6 * CELL + CELL/2;
+  await page.mouse.click(px, py);
+  await page.waitForTimeout(300);
+  const status2 = await page.evaluate(() => document.getElementById('status').textContent);
+  console.log('After selecting pawn:', status2);
+  const mx = box.x + PADDING + 4 * CELL + CELL/2;
+  const my = box.y + PADDING + 5 * CELL + CELL/2;
+  await page.mouse.click(mx, my);
+  await page.waitForTimeout(3000);
+  const status3 = await page.evaluate(() => document.getElementById('status').textContent);
+  console.log('After move (3s):', status3);
+  errors.forEach(e => console.log(e));
+  if (!errors.length) console.log('No JS errors!');
+  await browser.close();
+})();
