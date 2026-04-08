@@ -80,12 +80,11 @@
 - 已添加到 LaunchAgent，开机自启
 
 ### OpenClaw Memory Search
-- 配置路径：`agents.defaults.memorySearch`
-- 向量模型：`bge-m3-mlx-4bit`（本地 oMLX 端口 8000，1024 维）
-- provider：`openai`（oMLX OpenAI兼容接口）
-- baseUrl：`http://127.0.0.1:8000/v1`
-- 混合检索：向量语义 + BM25 关键词
-- 对话模型：`MiniMax-M2.7`（另一个独立配置项）
+> ⚠️ 已禁用（2026-04-08）
+- `agents.defaults.memorySearch.enabled = false` 已配置
+- 改用纯 grep 搜索（AGENTS.md 里规定的正确方式）
+- 向量搜索会 fallback 到 OpenAI text-embedding-3-small，要彻底禁用必须设 `enabled: false`
+- LCM 压缩继续正常运行，不受影响
 
 ---
 
@@ -227,28 +226,25 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 - **memory/YYYY-MM-DD.md**：每日对话记忆片段
 - **daily_summary_YYYYMMDD.txt**：每日工作总结
 
-### 启动检查清单
-> `SESSION_CHECKLIST.md` — 每次新 session 第一件事，逐项勾完再工作
+### 启动检查清单（简化版，2026-04-08）
+> 每次新 session 启动，**按顺序读以下文件**（不需要勾清单，理解即可）：
 
-### Obsidian Memory 系统
+1. **MEMORY.md** — 总纲，每次必读
+2. **.learnings/LEARNINGS.md** — 最近教训，新错误优先
+3. **memory/YYYY-MM-DD.md** — 今天 + 过去 3 天的 session 记忆（按 mtime 倒序）
+
+> ⚠️ SESSION_CHECKLIST.md 已废弃（太重，无法持续执行）
+
+### Obsidian Memory 系统 — 参考资料库
 > 完整路径：`~/Documents/Obsidian Vault/memory/`
+> **不是启动必读**，是「需要时去查」的参考资料库
 
-**核心索引**：`.memory-manifest.json`
-- `boot_memories`：每次启动必须读的 10 条 high importance 记忆
-- `memories`：按 type=decision/identity/learned/setup/project 分类的所有记忆
-- `last_updated`：下次新增记忆时追加位置
-- retention policy：high 永久 / medium 90天 / low 30天
+**用途**：
+- 长期知识沉淀（项目进展、决策背景、行业洞察）
+- Librarian Skill 保存的 URL 路由表
+- 老板偶尔问「上次关于 X 的决策」→ 去 Obsidian 搜
 
-**启动必读规则**
-每次新 session 启动时，必须按以下顺序读取：
-1. MEMORY.md（总纲）
-2. `.memory-manifest.json`（索引，找 boot:true 的记忆）
-3. boot:true 的对应记忆文件
-4. 最近 3~4 天的 daily memory 文件
-
-### 手动同步
-- workspace-main/memory/ → Obsidian memory/ 是手动 cp
-- 每次 session 结束后检查是否有新 memory 文件，有则同步 + 追加到 manifest
+**不强迫同步**：workspace memory/ 和 Obsidian memory/ 是两个独立系统，不需要每次手动同步
 
 ### 定期清理
 - 每月最后一天：review MEMORY.md，删除过时内容
@@ -313,16 +309,18 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 
 ## ⭐ 自动化任务健康状态
 
-> 以下 cron 任务有连续错误或已停用，需要关注：
+> 以下 cron 任务均已修复或删除，记忆系统工作正常（2026-04-08）
 
-| 任务 | ID | 状态 | 问题 |
-|------|-----|------|------|
-| inbox清理 | `43880f68` | ✅ 已修复（系统crontab） | 脚本本身OK，agent isolated有70s硬限制，改用系统cron |
-| 每周记忆清理 | `d5e15105` | ✅ 已修复（系统crontab） | 同上 |
-| 每月MEMORY Review | `e3db79be` | ⚠️ 未知错误 | 需手动检查 |
-| 僵尸session清理 | `4001791e` | 🔴 来源不明 | agent isolated 70s限制，记入MEMORY.md待查 |
-| 主页推送 | `353b20d7` | ❌ 已删除 | 无效cron ID |
-| 定时任务 | `38e73e34` | ❌ 已删除 | 无效cron ID |
+| 任务 | 系统 | 状态 | 备注 |
+|------|------|------|------|
+| inbox清理 | 系统 crontab（python3） | ✅ 正常 | 每天 00:00 |
+| 每周记忆清理 | 系统 crontab（python3） | ✅ 正常 | 每周日 03:00 |
+| 僵尸session清理 | ❌ 已删除 | — | 无效任务，agent isolated 会超时 |
+| OpenClaw改进监督 | ❌ 已删除 | — | 同上，冗余监控 |
+| 每月MEMORY Review | ❌ 已删除 | — | 同上 |
+| 主页推送 | ❌ 已删除 | — | 无效 cron ID |
+
+**说明**：所有会触发 isolated agent 的 cron 均改用系统 crontab 直接跑 Python 脚本，不再走 OpenClaw agent 模式。
 
 
 ## ⭐ Chrome 实时浏览监控（高级技能）

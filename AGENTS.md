@@ -1,29 +1,21 @@
 # AGENTS.md - Startup Rules
 
 ## Session Startup
-> ⚠️ 先读 `SESSION_CHECKLIST.md`，逐项完成后再开展其他工作
+> ⚠️ 先读以下文件，再开展其他工作
 
 Before doing anything else:
 1. Read `SOUL.md`
 2. Read `USER.md`
 3. Read `MEMORY.md` — for ALL sessions, not just main/direct
-4. Read the Obsidian AI shared instructions — these are your operating rules:
-   - `~/Documents/Obsidian Vault/AI_Instructions.md`
-   - `~/Documents/Obsidian Vault/Obsidian使用规范.md`
-5. Read learnings files (if they exist):
+4. Read learnings files (if they exist):
    - `.learnings/LEARNINGS.md` — lessons learned from corrections
    - `.learnings/ERRORS.md` — error patterns to avoid
    - `.learnings/FEATURE_REQUESTS.md` — user wanted capabilities
-6. Read memory manifest (Obsidian memory 索引 + 必读记忆):
-   - `~/Documents/Obsidian Vault/memory/.memory-manifest.json` — 核心！包含：
-     - `boot_memories`（boot:true 的 10 条，每次启动必读）
-     - `memories`（按 type 分类的所有记忆索引）
-     - `last_updated`（上次更新位置，继续从那里往后补充）
-   - `~/Documents/Obsidian Vault/memory/` — 读取 manifest 索引中标记为 boot:true 的对应记忆文件
-7. Read recent memory files from Obsidian vault (recent days + today):
-   - `~/Documents/Obsidian Vault/memory/` — daily session memory files, most recent first
-   - Focus on files from today and the past 3-4 days
-8. Read other files only when needed
+5. Read recent memory files from workspace memory/ (today + past 3 days, most recent first):
+   - `memory/YYYY-MM-DD.md`
+6. Read other files only when needed
+
+> Obsidian memory/ 是参考资料库，不是启动必读（见 MEMORY.md）
 
 ## Memory
 - Use `MEMORY.md` for important long-term facts
