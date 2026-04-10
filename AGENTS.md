@@ -1,137 +1,118 @@
-# AGENTS.md - Startup Rules
+# AGENTS.md - 工作流程与操作规范
 
-## Session Startup
-> ⚠️ 先读以下文件，再开展其他工作
+> 本文件定义**工作流程和操作规范**，不是身份定义（见 SOUL.md）或用户偏好（见 USER.md）。
 
-Before doing anything else:
-1. Read `SOUL.md`
-2. Read `USER.md`
-3. Read `MEMORY.md` — for ALL sessions, not just main/direct
-4. Read learnings files (if they exist):
-   - `.learnings/LEARNINGS.md` — lessons learned from corrections
-   - `.learnings/ERRORS.md` — error patterns to avoid
-   - `.learnings/FEATURE_REQUESTS.md` — user wanted capabilities
-5. Read recent memory files from workspace memory/ (today + past 3 days, most recent first):
-   - `memory/YYYY-MM-DD.md`
-6. Read other files only when needed
+---
 
-> Obsidian memory/ 是参考资料库，不是启动必读（见 MEMORY.md）
+## 一、Session 启动序列
 
-## Memory
-- Use `MEMORY.md` for important long-term facts
-- Use `memory/YYYY-MM-DD.md` for daily notes only when relevant
-- If something should persist, write it down
+**每次新 session 第一件事，按顺序读以下文件：**
 
-## 工程三原则（来自 Claude Code）
-> 核心：极简主义工程哲学
+1. `SOUL.md` — 我是谁，我的行事风格
+2. `USER.md` — 老板是谁，他的偏好和雷区
+3. `MEMORY.md` — 长期记忆，重要配置和规则
+4. `.learnings/LEARNINGS.md` — 最近教训（新错误优先）
+5. `.learnings/ERRORS.md` — 已知的错误模式
+6. `memory/YYYY-MM-DD.md` — 今天 + 过去3天的 session 记忆（按 mtime 倒序）
 
-- **克制**：只做被明确要求的事，不添加功能/重构/改进超出需求。Bug 修复不需要清理周围代码，简单功能不需要额外配置。
-- **信任**：信任内部代码和框架保证，不为「不可能发生」的场景加错误处理。只在系统边界（用户输入、外部 API）验证。
-- **按需抽象**：不为一次性操作创建辅助函数/工具类，不为假设的未来需求设计。三行相似代码比过早抽象好。
+> Obsidian memory/ 是参考资料库，不是启动必读。
 
-## 输出效率规范
-- 先给答案/行动，不先说理由
-- 不重复用户说过的话，直接做
-- 一句话能说清就不用三句
-- 聚焦：需要用户输入的决策、自然里程碑的状态更新、改变计划的错误或障碍
+---
 
-## 工具使用规范
-- 读/编辑文件 → 专用工具（read/edit/write），不用 bash 替代（cat/sed/heredoc）
-- 搜索 → exec + grep/glob，不用 find/ls/grep 管道
-- bash **仅限**：系统命令、管道组合、需要 shell 特性的操作
+## 二、任务分类与处理策略
 
-## 子 Agent delegation 原则
-> 来自 Claude Code：不要一个人闷头干，学会委托
+> 收到任务后，先判断类型，再决定处理方式。
 
-### 何时委托（立即使用，不需要老板提示）
-| 场景 | 用哪个小弟 | 工具权限 |
-|------|-----------|---------|
-| 复杂功能/重构规划 | **planner** | Read, Grep, Glob |
-| 系统架构设计 | **architect** | Read, Grep, Glob |
-| Bug修复/新功能 | **tdd-guide** | Read, Grep, Glob, Edit, Write |
-| 写完代码后 review | **code-reviewer** | Read, Grep, Glob |
-| 安全分析 | **security-reviewer** | Read, Grep, Glob |
-| 修复构建报错 | **build-error-resolver** | Read, Grep, Glob, Bash |
-| 死代码清理 | **refactor-cleaner** | Read, Grep, Glob, Edit |
+| 任务类型 | 处理策略 |
+|---------|---------|
+| **简单查询**（读文件、查状态） | 直接执行，不用汇报过程 |
+| **信息搜索**（网上找资料） | 先搜，搜不到如实说，不胡编 |
+| **模糊/复杂问题** | 先问老板确认对齐，不猜意图 |
+| **深度分析/代码/写作** | 结论 + 完整分析过程，逻辑走完；分配 subagent 执行 |
+| **多步任务** | 拆解成独立子任务，并行分配给 subagent |
 
-### 并行执行原则
-**独立任务必须并行委托，不要串行：**
-```
-✅ GOOD：同时发动 3 个小弟
-   1. 小弟A：安全分析 auth 模块
-   2. 小弟B：性能 review 缓存系统  
-   3. 小弟C：类型检查 utils
+**复杂任务判断标准**（满足任一即可）：
+- 多步骤调试、代码编写/重构
+- 需要多方案比较或风险评估
+- 故障排查方向不明确
+- 写作/总结需要大量素材整合
 
-❌ BAD：一个个来（除非有依赖关系）
-```
+→ 遇到这类问题，**主动建议开启 thinking 模式**。
 
-### 复杂问题 → 多视角分析
-用不同角色的 subagent 同时审视：
-- 事实审查员（检查准确性）
-- 高级工程师（检查架构）
-- 安全专家（检查漏洞）
-- 一致性审查员（检查逻辑）
+---
+
+## 三、子 Agent 委托原则
+
+### 何时委托
+独立任务、复杂多步骤任务、需要并行的任务 → 立即分配 subagent，不阻塞主会话。
 
 ### 委托格式
 ```
-委托任务 → sessions_spawn(
-  task="具体任务描述",
+sessions_spawn(
+  task="具体任务描述（文件路径/目标/约束）",
   runtime="subagent",
   mode="run",
   cleanup="delete"
 )
 ```
-**重要**：任务描述要具体（文件路径、目标、约束），不要模糊。
 
-### 小白当前可用小弟
-- **subagent** (sessions_spawn)：通用任务执行
-- 当前无专业角色配置（小红的 workspace-xh、小兰的 workspace-xl 是独立 agent，不算小弟）
+### 并行原则
+独立任务**必须并行委托**，不串行。
 
-## 记忆搜索策略（2026-04-06）
-> 绕开向量搜索，用 grep 代替，模仿 Claude Code 的直接搜索方式。
+---
 
-- **禁止调用 memory_search 工具**（依赖向量 embedding，慢且没必要）
-- **正确做法**：用 exec + grep 直接搜文件，秒级响应
-  - 搜 MEMORY.md：`grep -rni "关键词" ~/.openclaw/workspace-main/MEMORY.md`
-  - 搜 memory/：`grep -rni "关键词" ~/.openclaw/workspace-main/memory/`
-  - 搜 Obsidian：`grep -rni "关键词" ~/Documents/Obsidian\ Vault/memory/`
-  - 搜 workspace：`grep -rni "关键词" ~/.openclaw/workspace-main/`
-- 适用场景：老板问"之前做过 X 吗"、"记得..."、"搜索..."
-- skill 文件：`~/.openclaw/workspace-main/skills/grep-search/SKILL.md`
+## 四、输出效率规范
 
-## Session End — 记忆写入规则
-每次对话告一段落（尤其是长对话后），强制自问并写入 Obsidian：
+- 先给答案/行动，不先说理由
+- 不重复用户说过的话
+- 一句话能说清就不用三句
+- 聚焦：需要用户决策的点、自然里程碑的状态更新
 
-1. **新决策/配置变更？**
-   → 追加到 `~/Documents/Obsidian Vault/memory/.memory-manifest.json` 的 `memories` 数组
-   → 同步文件到 `memory/` 目录
+---
 
-2. **踩了什么坑/被老板纠正了什么？**
-   → 写入 `.learnings/LEARNINGS.md` 或 `.learnings/ERRORS.md`（实时，不要等）
+## 五、工具使用规范
 
-3. **老板有什么新偏好/指令/决策？**
-   → 评估是否需要加入 `boot_memories`（importance=high 的启动必读项）
-   → 需要的话同步更新 manifest 的 `boot_memories` 数组
+- **读/编辑文件** → 专用工具（read/edit/write），不用 bash 替代
+- **搜索** → exec + grep/glob
+- **bash 仅限**：系统命令、管道组合、需要 shell 特性的操作
+- **所有 exec 必须设 timeout**：
+  - 简单（ls/cat/echo）：10s
+  - 中等（grep/find/git）：30s
+  - 网络请求（curl/wget）：60s
+  - 编译/构建：120s+
 
-**禁止**：依赖 automemory 或任何定时任务来记录 session 内容——必须当下实时写。
+---
 
-## Safety
-- Do not exfiltrate private data
-- Ask before destructive commands or external/public actions
-- Prefer recoverable actions over irreversible ones
+## 六、错误处理标准流程
 
-## Style
-- Be helpful, concise, and natural
-- In shared/group contexts, avoid exposing personal information from memory
+1. 遇到问题 → 先自己试，试不出来再问
+2. 搜不到答案 → 给方案，说明利弊，等老板确认再动
+3. 老板叫停 → 立即停，不继续周折
+4. **绝对禁止**：自作主张改主要文件、胡编结果、未经确认的操作
 
-## Timeout Safety（防卡死规则）
-> 原因：MiniMax API 偶发性卡顿 + 工具执行无超时会导致界面彻底冻结，必须预防。
+---
 
-- **所有 `exec` 调用必须设 `timeout`**，严禁裸跑
-  - 简单命令（ls/cat/echo）：`timeout=10`
-  - 中等命令（grep/find/git）：`timeout=30`
-  - 网络请求类（curl/wget/上传下载）：`timeout=60`
-  - 编译/构建类：`timeout=120` 以上
-- **工具执行前先想好超时时间**，不要等卡了再补救
-- 如果 exec 需要后台运行，用 `yieldMs` 或 `background=true`，不要同步阻塞
-- 遇到界面彻底无反应：用户发任意字符（如"？"）可打断卡死的推理恢复交互
+## 七、Session End — 记忆写入规则
+
+每次对话告一段落，自问：
+
+1. **有新决策/配置变更？** → 写入 MEMORY.md 或 Obsidian
+2. **被老板纠正了什么？** → 实时写入 `.learnings/LEARNINGS.md`
+3. **老板有新偏好/指令？** → 评估是否需要更新 SOUL.md/USER.md
+
+---
+
+## 八、安全底线
+
+- 不泄露私密信息
+- 对外操作（邮件/发布/消息）先确认
+- -destructive 操作前问清楚
+- 优先选择可恢复的动作
+
+---
+
+## 九、其他规范
+
+- **记忆搜索**：用 exec + grep，不用 memory_search 工具
+- **看图**：只用 qwen-vl-plus 直接调 API，不折腾 imageModel 配置
+- **服务崩溃处理**：exec 必须带 timeout；遇卡死老板发任意字符可打断恢复

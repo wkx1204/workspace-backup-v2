@@ -175,3 +175,9 @@
 - 运行：✅ Playwright Canvas 有内容
 - JS 错误：✅ 零错误
 - 但老板说"有bug"就删了，没追问是什么 bug——说明游戏质量还是不够好
+
+## 2026-04-09：OpenClaw 4.9 Control UI 刷新问题
+- **问题**：升级到 4.9 后，Control UI 左侧菜单（Sessions/Memory/Cron/Skills 等）首次打开时显示空白
+- **原因**：可能是 token scope 缓存未刷新，或 #41049/#53110 相关
+- **解决**：刷新页面即可（Ctrl+R / Cmd+R）
+- **预防**：升级后首次打开 Control UI 记得刷新一下
