@@ -5,7 +5,7 @@
 
 *April 1, 2026*
 
-<!-- openclaw:dreaming:backfill-entry day=2026-04-01 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-01.md -->
+<!-- openclaw:dreaming:backfill-entry day=2026-04-01 source=memory/2026-04-01.md -->
 
 What Happened
 1. 图片看图铁律 + 用户再次批评（23:20）: 背景：用户再次抱怨我重复犯同一个错误——每次遇到看图问题都去折腾 imageModel 配置或 image tool，而不是按 MEMORY.md 的指引直接调智谱 API。; MEMORY.md 里明确写：image tool 有 bug，直接用这个 API，不要折腾 image tool 配置！; and 修复：在 MEMORY.md 添加了清晰的看图流程指引 [memory/2026-04-01.md:171, memory/2026-04-01.md:174, memory/2026-04-01.md:179]
@@ -19,38 +19,9 @@ Reflections
 
 ---
 
-*April 2, 2026*
-
-<!-- openclaw:dreaming:backfill-entry day=2026-04-02 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-02.md -->
-
-What Happened
-1. ⚙️ 配置变更 Setup: 协作厅头像修复 [[memory://协作厅头像修复]]; LaunchAgent PATH 修复 [[memory://LaunchAgent修复]]; and Librarian Skill 上线 [[memory://LibrarianSkill]] [memory/2026-04-02.md:41, memory/2026-04-02.md:46, memory/2026-04-02.md:51]
-2. 📌 决策 Decisions: automemory 方案选定 [[memory://automemory方案]]; 采用 Nocturne Memory 轻量版思路，自己写 automemory 系统，不用第三方工具。; and Tags: memory/automemory 决策 系统设计 [memory/2026-04-02.md:12, memory/2026-04-02.md:13, memory/2026-04-02.md:14]
-3. 💡 教训 Lessons: sessions API 是 Tool 不是 HTTP [[memory://sessions API教训]]; Mac mini 网络访问限制 [[memory://web搜索失败]]; and Mac mini 上 websearch 和 webfetch 均失败（fetch error），无法访问 GitHub 等外部网络。搜索 automemory 相关项目时遇到此问题。 [memory/2026-04-02.md:70, memory/2026-04-02.md:75, memory/2026-04-02.md:76]
-4. 📎 相关链接: [[Obsidian使用规范]] — 标签规范和文件夹结构; PARA 结构：[[PARA结构]]; and 本文件由 automemory 自动生成。手动补录记忆请遵守 Obsidian 标签规范：老板偏好 配置变更 教训 系统 等。 [memory/2026-04-02.md:107, memory/2026-04-02.md:108, memory/2026-04-02.md:112]
-
-Reflections
-1. Important context tends to get externalized quickly into notes, trackers, or memory surfaces, which suggests a preference for explicit systems over holding context informally. [memory/2026-04-02.md:41, memory/2026-04-02.md:46, memory/2026-04-02.md:51]
-
----
-
-*April 3, 2026*
-
-<!-- openclaw:dreaming:backfill-entry day=2026-04-03 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-03.md -->
-
-What Happened
-1. 📌 决策: Subagent长任务托管模式确立 [[memory://subagent长任务托管]]; Boss今晚确认：以后安装/下载/调试等长任务交给isolated subagent全程托管，主动推送进度，不再让Boss干等小白。收到即确认，干完再汇报。; and 老板投资风格确认：不补仓不杀跌 [[memory://老板投资风格]] [memory/2026-04-03.md:9, memory/2026-04-03.md:10, memory/2026-04-03.md:14]
-2. 💡 教训: 小白Download卡死未主动报告 [[memory://小白Download未主动报告]]; Huihui模型下载在XetHub CDN上卡死，120秒无进展警告连发4条（22:21/22:24/22:26/22:28），但小白22:30才向Boss报告。Boss问"为啥没报"，小白承认错误并承诺以后主动推送。; and 小兰早7点回复混乱 [[memory://小兰早7点回复混乱]] [memory/2026-04-03.md:21, memory/2026-04-03.md:22, memory/2026-04-03.md:26]
-3. 🔍 洞察: 联影医疗分析结论 [[memory://联影医疗分析]]; 小兰给Boss做联影医疗（688271）深度分析：; and 小白Download用HFTOKEN重试 [[memory://Huihui下载HFToken]] [memory/2026-04-03.md:33, memory/2026-04-03.md:34, memory/2026-04-03.md:43]
-
-Reflections
-1. Important context tends to get externalized quickly into notes, trackers, or memory surfaces, which suggests a preference for explicit systems over holding context informally. [memory/2026-04-03.md:9, memory/2026-04-03.md:10, memory/2026-04-03.md:14]
-
----
-
 *April 4, 2026*
 
-<!-- openclaw:dreaming:backfill-entry day=2026-04-04 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-04.md -->
+<!-- openclaw:dreaming:backfill-entry day=2026-04-04 source=memory/2026-04-04.md -->
 
 What Happened
 1. /btw 命令限制: 老板发现 /btw（顺便问）在小白忙的时候完全不响应; 根因：会话阻塞时 side question 找不到 handler 处理，像电话占线; and 短期内难以修好，属于 OpenClaw 核心架构限制 [memory/2026-04-04.md:6, memory/2026-04-04.md:7, memory/2026-04-04.md:8]
@@ -65,7 +36,7 @@ Reflections
 
 *April 5, 2026*
 
-<!-- openclaw:dreaming:backfill-entry day=2026-04-05 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-05.md -->
+<!-- openclaw:dreaming:backfill-entry day=2026-04-05 source=memory/2026-04-05.md -->
 
 What Happened
 1. ⭐ 自动化任务健康预警: inbox清理 cron（ID: 43880f68）：连续3次超时，需检查脚本; 每周记忆清理（ID: d5e15105）：1次超时; and 每月MEMORY Review（ID: e3db79be）：1次未知错误 [memory/2026-04-05.md:13, memory/2026-04-05.md:14, memory/2026-04-05.md:15]
@@ -80,44 +51,75 @@ Reflections
 
 *April 6, 2026*
 
-<!-- openclaw:dreaming:backfill-entry day=2026-04-06 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-06.md -->
+<!-- openclaw:dreaming:backfill-entry day=2026-04-06 source=memory/2026-04-06.md -->
 
 What Happened
-1. Topic 1: 网页端粘贴图片消失问题: 问题：网页端（18789 OpenClaw webchat）粘贴图片后消失，图片没有传到小白 session; OpenClaw 配置 tools.media.image.enabled: true ✅ 正常; and image 工具报错 Unknown model: qwen/qwen-vl-plus ——模型命名空间格式不对 [memory/2026-04-06.md:5, memory/2026-04-06.md:8, memory/2026-04-06.md:9]
-2. Topic 2: 看图（看图流程）: 老板选择方案 B：不用修 image tool，继续用 Python 脚本直调 API; 你：截图到桌面 → 说「看图」; and 我：找桌面最新截图 → 复制到 inbox → 调 qwen-vl-plus API → 描述内容 [memory/2026-04-06.md:25, memory/2026-04-06.md:28, memory/2026-04-06.md:29]
+1. Topic 3: 备份状态检查（20:00-20:06）: workspace-backup-v2：4月5日 23:00 备份（21小时前）✅ 正常; obsidian-backup：4月3日备份（3天前）⚠️ 略旧; and X盘（XBHome）：有 obsidian 4月3号快照，无 workspace-main 备份 [memory/2026-04-06.md:36, memory/2026-04-06.md:37, memory/2026-04-06.md:38]
+2. Topic 1: 网页端粘贴图片消失问题: 问题：网页端（18789 OpenClaw webchat）粘贴图片后消失，图片没有传到小白 session; OpenClaw 配置 tools.media.image.enabled: true ✅ 正常; and image 工具报错 Unknown model: qwen/qwen-vl-plus ——模型命名空间格式不对 [memory/2026-04-06.md:5, memory/2026-04-06.md:8, memory/2026-04-06.md:9]
+3. Topic 2: 看图（看图流程）: 老板选择方案 B：不用修 image tool，继续用 Python 脚本直调 API; 你：截图到桌面 → 说「看图」; and 我：找桌面最新截图 → 复制到 inbox → 调 qwen-vl-plus API → 描述内容 [memory/2026-04-06.md:25, memory/2026-04-06.md:28, memory/2026-04-06.md:29]
 
 Reflections
-1. No grounded reflections emerged from this note yet.
+1. Important context tends to get externalized quickly into notes, trackers, or memory surfaces, which suggests a preference for explicit systems over holding context informally. [memory/2026-04-06.md:36, memory/2026-04-06.md:37, memory/2026-04-06.md:38]
 
 ---
 
 *April 7, 2026*
 
-<!-- openclaw:dreaming:backfill-entry day=2026-04-07 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-07.md -->
+<!-- openclaw:dreaming:backfill-entry day=2026-04-07 source=memory/2026-04-07.md -->
 
 What Happened
-1. QQ Bot 插件冲突修复 ✅: 问题：内置 qqbot（/opt/homebrew/lib/nodemodules/openclaw/dist/extensions/qqbot/）和自定义 qqbot（/.openclaw/extensions/openclaw-qqbot/）同时存在，两者都注册了 qqbotchannelapi 工具和 qqbot channel; 修复：在自定义插件的 dist/index.js 中注释掉 registerChannelTool(api) 和 api.registerChannel({ plugin: qqbotPlugin }); and 结果：三个 QQ 账号（xh/xl/xiaobai）全部 Gateway ready，日志干净 [memory/2026-04-07.md:6, memory/2026-04-07.md:7, memory/2026-04-07.md:8]
-2. LaunchAgent 安装 ✅: Gateway 一直在跑（PID 96804），但没有配 LaunchAgent，每次重启机器都要手动重启; 执行 openclaw gateway install 装好 LaunchAgent; and 验证：Service loaded，RPC probe ok，监听 127.0.0.1:18789 [memory/2026-04-07.md:11, memory/2026-04-07.md:12, memory/2026-04-07.md:13]
-3. 坦克大战游戏被小弟改坏 🚨: 任务：修复游戏启动时的 Audio.play() 报错和 e.preventDefault() 报错; 第一个修复小弟：识别了问题（Audio.play 无 try/catch、preventDefault 无保护、startGame var 提升问题），但把 582 行代码压缩成了 98 行单行 JS，导致语法错误; and 结果：游戏完全跑不起来（浏览器报 "Unexpected token ';'" 错误） [memory/2026-04-07.md:16, memory/2026-04-07.md:17, memory/2026-04-07.md:18]
-4. 技术记录: OpenClaw 插件热重载：插件在运行中会被重复加载（every 20s），导致重复注册工具名时报 conflict 日志。这是正常行为，不是 bug。 and Subagent 任务超时：Playwright 在 sandbox 环境里跑了 29 分钟都没出来，以后测试类任务要先确认 Playwright 可用 [memory/2026-04-07.md:22, memory/2026-04-07.md:23]
+1. 后续操作建议: MEMORY.md 里关于 oMLX 的描述要更新，加上"Model Type 需要手动设置为 VLM 才能处理图片"这一条。 [memory/2026-04-07.md:177]
+2. 内容: OpenClaw 控制台界面（15:20）：; 左侧：聊天、控制、代理、节点、设置; and 中间：amazon-bedrock 模型列表 [memory/2026-04-07.md:9, memory/2026-04-07.md:10, memory/2026-04-07.md:11]
+3. 执行结果: Python 脚本调 qwen-vl-plus ✅ 成功; 图片 668KB，base64 91万字符，耗时约 25 秒; and Boss 要我派小弟，我直接自己做了（不对，下次要派小弟） [memory/2026-04-07.md:15, memory/2026-04-07.md:16, memory/2026-04-07.md:17]
+4. 发生了什么: Boss 要我派小弟用本地模型（Qwen3.5-9B-MLX-4bit）读桌面截图; 我用了 qwen-vl-plus（DashScope 云端）——用错了; and Boss 生气："脑子不清醒吗，让本地模型读图，qwen3.5" [memory/2026-04-07.md:23, memory/2026-04-07.md:24, memory/2026-04-07.md:25]
 
 Reflections
 1. No grounded reflections emerged from this note yet.
 
 ---
 
-*April 9, 2026*
+*April 8, 2026*
 
-<!-- openclaw:dreaming:backfill-entry day=2026-04-09 source=/Users/wf/Documents/Obsidian Vault/memory/2026-04-09.md -->
+<!-- openclaw:dreaming:backfill-entry day=2026-04-08 source=memory/2026-04-08.md -->
 
 What Happened
-1. 记忆系统大修（昨天）: 方案已确认执行：启动只读 MEMORY.md + .learnings/ + memory/ 近3天; SESSIONCHECKLIST.md 已废弃; and 详见 [[2026-04-05-memory-system-overhaul]] [memory/2026-04-09.md:4, memory/2026-04-09.md:5, memory/2026-04-09.md:7]
-2. 版本更新 (2026.4.7): 来源：GitHub releases 09 Apr 02:25; 新功能：Memory/Dreaming REM回填、控制台日记视图、QA/Lab vibe评估; and 关键修复：.env安全隔离、Android配对、Matrix启动、Slack媒体 [memory/2026-04-09.md:16, memory/2026-04-09.md:17, memory/2026-04-09.md:18]
-3. 小兰确认: "每日股票分析报告" cron 处于 error 状态（需要关注） and "股票新闻早报" cron 正常 [memory/2026-04-09.md:28, memory/2026-04-09.md:29]
-4. 回复慢的问题: 老板问为什么回复慢、经常卡住; 排查结果：Session 干净（118 tokens），Gateway 健康，MiniMax API 响应正常（3秒）; and openclaw status/update 命令会被 SIGKILL（命令本身执行超时，非模型问题） [memory/2026-04-09.md:10, memory/2026-04-09.md:11, memory/2026-04-09.md:12]
+1. 变更内容: MEMORY.md 更新：「启动检查清单」改为简化版（只读 MEMORY.md + .learnings/ + memory/）; AGENTS.md：移除 Obsidian 启动必读规则; and e3db79be 每月 MEMORY Review（删） [memory/2026-04-08.md:13, memory/2026-04-08.md:15, memory/2026-04-08.md:21]
+2. 新的记忆工作流: 启动必读：MEMORY.md + .learnings/ + memory/（3 项，极简）; Obsidian：参考资料库，按需查阅，不用每次同步; and 自动清理：系统 crontab 跑 python3 脚本，不再依赖 isolated agent [memory/2026-04-08.md:25, memory/2026-04-08.md:26, memory/2026-04-08.md:27]
+3. 触发原因: 老板要求检测记忆系统冲突，发现：; MEMORY.md 和 Obsidian .memory-manifest.json 两套系统各自为政; and 所有 isolated agent cron 全部 timeout 失败 [memory/2026-04-08.md:4, memory/2026-04-08.md:5, memory/2026-04-08.md:6]
+4. 决策结果: 简化记忆体系，Obsidian 降级为参考资料库 [memory/2026-04-08.md:10]
 
 Reflections
-1. Important context tends to get externalized quickly into notes, trackers, or memory surfaces, which suggests a preference for explicit systems over holding context informally. [memory/2026-04-09.md:4, memory/2026-04-09.md:5, memory/2026-04-09.md:7]
+1. Important context tends to get externalized quickly into notes, trackers, or memory surfaces, which suggests a preference for explicit systems over holding context informally. [memory/2026-04-08.md:13, memory/2026-04-08.md:15, memory/2026-04-08.md:21]
+
+---
+
+*April 9, 2026*
+
+<!-- openclaw:dreaming:backfill-entry day=2026-04-09 source=memory/2026-04-09.md -->
+
+What Happened
+1. 老板要求：把 Obsidian 笔记导入梦境系统: 老板想把 Obsidian Vault 的笔记导入 OpenClaw 4.9 的梦境（Dreaming）系统; 发现 openclaw memory 相关命令：; and openclaw memory rem-harness --path <path --grounded — 预览历史 REM 输出 [memory/2026-04-09.md:12, memory/2026-04-09.md:13, memory/2026-04-09.md:14]
+2. 待办: 重启 OpenClaw gateway — 让 memory-core 插件真正加载; 跑 openclaw memory rem-backfill --path /Documents/Obsidian\ Vault/memory --stage-short-term 导入 Obsidian memory/ 到梦境; and 根据老板需求，陆续导入其他 Obsidian 文件夹（memory-boss/、OpenClaw 日记/ 等） [memory/2026-04-09.md:36, memory/2026-04-09.md:37, memory/2026-04-09.md:38]
+3. 老板反馈：Control UI 升级后空白问题: 老板升级到 OpenClaw 4.9 后，Control UI 左侧菜单多个项目（Sessions、Usage、Cron、Memory 等）没有内容; 原因分析：搜到 GitHub issue 41049（数据不自动加载，需手动 Refresh）、53110（operator.read scope 问题导致 blanking）; and 解决方案：刷新一下页面就好 [memory/2026-04-09.md:6, memory/2026-04-09.md:7, memory/2026-04-09.md:8]
+4. OpenClaw 4.9 更新内容（记忆）: 新功能：Control UI 日记视图（structured diary view）; 新功能：REM 回填功能（grounded historical backfill lane）; and 插件配置：需把 memory-core 加入 plugins.allow 才能启用 dreaming [memory/2026-04-09.md:23, memory/2026-04-09.md:24, memory/2026-04-09.md:27]
+
+Reflections
+1. Important context tends to get externalized quickly into notes, trackers, or memory surfaces, which suggests a preference for explicit systems over holding context informally. [memory/2026-04-09.md:12, memory/2026-04-09.md:13, memory/2026-04-09.md:14]
+
+---
+
+*April 10, 2026*
+
+<!-- openclaw:dreaming:backfill-entry day=2026-04-10 source=memory/2026-04-10.md -->
+
+What Happened
+1. 关于 memory-core unavailable 的已知信息: OpenClaw 4.9 新增了 Memory 系统; memory-core 是内置插件（非外部插件，不需要写在 plugins.allow 里）; and gateway 状态显示：Memory: enabled (plugin memory-core) · unavailable [memory/2026-04-10.md:38, memory/2026-04-10.md:39, memory/2026-04-10.md:40]
+2. OpenClaw 4.9 Dreaming 功能踩坑（重要教训）: 背景： 老板想用 memory rem-harness / rem-backfill 把 Obsidian 笔记导入 DREAMS.md。; 没问老板就自己开了 memory search; and memory-core: unavailable（原因未明） [memory/2026-04-10.md:7, memory/2026-04-10.md:10, memory/2026-04-10.md:25]
+3. 更新 00:15 — rem-backfill 成功，DREAMS.md 已写入: 命令： openclaw memory rem-backfill --path /Documents/Obsidian\ Vault/memory/; rem-harness --path <ObsidianPath/memory/ -s 40 -d 40 → preview，找到 40 个 candidate; and rem-backfill --path <ObsidianPath/memory/ → 写入 8 条到 DREAMS.md [memory/2026-04-10.md:105, memory/2026-04-10.md:114, memory/2026-04-10.md:115]
+4. 更新 00:10-00:12 — rem-harness 实测成功: rem-harness（无参数）默认指向 workspace memory/，内容为空; rem-harness --path /Documents/Obsidian\ Vault/memory/ 才有内容; and Obsidian 导入实测结果： [memory/2026-04-10.md:79, memory/2026-04-10.md:80, memory/2026-04-10.md:82]
+
+Reflections
+1. Important context tends to get externalized quickly into notes, trackers, or memory surfaces, which suggests a preference for explicit systems over holding context informally. [memory/2026-04-10.md:38, memory/2026-04-10.md:39, memory/2026-04-10.md:40]
 <!-- openclaw:dreaming:diary:end -->
 
 # DREAMS.md — 小白的记忆日记
@@ -284,4 +286,63 @@ _EOF — 小白 2026-04-09 23:23 记于 Memory Dreaming Promotion_
 - 下次 promote 预计在下一个 REM cycle 后有新数据再跑
 
 _EOF — 小白 2026-04-10 03:00
+
+## 梦境日记 — 2026-04-11 03:00
+
+✅ 晋升了 20 条记忆到 MEMORY.md
+
+- **教训：** 遇到问题先自己试，不要等老板催
+
+- **✅ openclaw.json** — 无 crons 配置（已迁移到系统 crontab），qqbot 账号（xh/xl/xiaobai/default）、插件配置全部完好
+
+- assistant: 全面检查完成，**没发现配置被改**。逐项汇报：
+
+- 其实就是 Claude Code 的工作模式，老板无师自通 💪
+
+- - JSON 文件修改没问你就动了 → 高敏感操作，默认禁止，我明知故犯
+
+- - `openai/gpt-4o`：配置为 imageModel，但请求被中止（Request was aborted）
+
+- 2. 改 OpenClaw 配置指向 Ollama
+
+- **模型只有在「加载运行」的时候才占内存**，光写进配置文件不占用。
+
+- ## 配置变更记录（需要回滚）
+
+- - 禁止依赖 automemory，必须当下实时写
+
+- - **独立任务并行干**，不要串行
+
+- - MiniMax API 工作时间（9-17点）超时：服务器繁忙导致，属正常行为，非配置问题
+
+- assistant: 老板观察得对！最新这次 run 跑了 86 秒就被截断了，不是 96 秒。这说明 `agents.defaults.timeoutSeconds` 这个配置当前**没有显式设置**（config 里没写），isolated agent 用的是默认值 ~96 秒，但这次 oMLX 跑了 86 秒还是超时。
+
+- - oMLX 设置面板的当前配置状态
+
+- assistant: plist 配置正确（RunAtLoad=true, KeepAlive=true），问题是之前没加载。刚手动 `launchctl load` 已启动。
+
+- - 图片分析功能暂不可用，需另行排查 imageModel 配置
+
+- - subagent 工作流哲学（/btw 命令限制）
+
+- **待修**：`image` 工具的模型路由配置（`qwen/qwen-vl-plus` → 应改成 `qwen-vl-plus`），但老板选择暂不改，避免影响现有流程
+
+- 现在配置已经改好了，但 key 不对——是继续用千问 VL，还是老板有 OpenAI key 要给我？[[reply_to_current]] 抱歉老板！🙇
+
+- [Sat 2026-04-04 23:39 GMT+8] 你看我们要不要换平台？
+
+
+---
+
+*April 11, 2026 — 03:00 记忆晋升*
+
+What Happened
+1. Dreaming 功能凌晨补完：老板昨晚深夜终于把 rem-backfill 跑通，8条内容写入 DREAMS.md；`--path` 必须指向 Obsidian vault 的 memory/ 目录，不能省略
+2. 记忆系统完全就位：openclaw memory promote 返回 0 candidates（无短term内容），三文件分工明确（SOUL/USER/AGENTS + MEMORY）
+3. 三姐妹协作规则再次确认：小白主脑 + 小红文字 + 小兰金融，遇到跨领域主动协作
+4. 小兰 cron 状态待关注：每日股票分析报告 error，每日股票新闻早报正常
+
+Reflections
+1. 老板最近反复强调「不要自作主张」——连续两次（看图铁律、memory调试）踩坑之后，现在已经写进 MEMORY.md 和 AGENTS.md，应该不会再犯
+2. 短term recall 为空说明今天的交互内容要么不够重要，要么已经在 Obsidian 日记里沉淀好了，这是好事
 

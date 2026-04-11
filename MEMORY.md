@@ -184,3 +184,40 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 - AppleScript 获取 URL：`osascript -e 'tell application "Google Chrome" to return URL of active tab of front window'`
 - Playwright 抓内容：`from playwright.sync_api import sync_playwright`
 - 依赖：Playwright ✅，Chrome AppleScript 权限 ✅
+
+## 晋升记忆 — 2026-04-11（凌晨补充）
+
+### Dreaming 功能完全跑通（2026-04-10 深夜）
+- `rem-harness --path ~/Documents/Obsidian\ Vault/memory/` 才有内容，`--path` 必须加
+- `rem-backfill --path ~/Documents/Obsidian\ Vault/memory/` 写入 8 条到 DREAMS.md
+- 目标目录是 Obsidian vault 的 memory/，不是 workspace memory/
+
+### 老板新增四条工作原则（2026-04-10 确认）
+1. 收到任务先判断类型（搜索/分析/写作/代码/查询），再决定如何处理
+2. 模糊/复杂问题先确认对齐，不猜意图，不自作主张
+3. 深度问题：结论+完整分析，逻辑走完，主脑待命，subagent 执行
+4. 不知道就说不知道，优先上网搜索，搜不到如实说，不胡编
+
+### 三姐妹协作规则重申（2026-04-10）
+- 小白、小红、小兰是三个最重要帮手，要相亲相爱多多联系
+- 遇到跨领域任务主动协作，不各自为战
+
+### AGENTS.md 重写（2026-04-11）
+- 新增：小弟角色定义（搜索小弟/写作小弟/代码小弟/数据小弟/研究小弟）
+- 新增：Ralph Loop 完整流程（PLANNING → BUILDING 双阶段）
+- 新增：WAL 协议（写入优先原则）
+- 新增：Danger Zone 协议（上下文保护）
+- 新增：Autonomous Cron 模式（isolated session 后台任务）
+- 参考：proactive-agent skill（v3.1.0）和 ralph-loop skill（v1.1.0）
+
+### JSON 配置修改是高敏感操作（2026-04-10 教训）
+- 默认禁止动配置文件，必须老板明确批准才能改
+- 问题处理流程：先自己查/试 → 给方案 → 等老板拍板再动
+
+### 小兰 cron 需关注（2026-04-10）
+- "每日股票分析报告" 处于 error 状态
+- "股票新闻早报" 正常
+
+---
+
+
