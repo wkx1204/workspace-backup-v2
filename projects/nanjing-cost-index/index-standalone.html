@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%234f6ef7'/><text x='90' y='125' font-size='90' text-anchor='middle'>🏗️</text></svg>">
 <title>工程造价速算工具</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,7 +47,7 @@
 <body>
 <div class="container">
   <h1>🏗️ 工程造价速算</h1>
-  <div class="subtitle">南京官方造价指数校准 · 含安装选项</div>
+  <div class="subtitle">上海官方造价指数 · 含南京苏州无锡常州</div>
 
   <div class="card">
     <div class="section-tabs">
@@ -117,9 +120,9 @@
           <option value="2020年">2020年</option>
           <option value="2021年">2021年</option>
           <option value="2022年">2022年</option>
-          <option value="2023年" selected>2023年（基准）</option>
+          <option value="2023年">2023年（基准）</option>
           <option value="2024年">2024年</option>
-          <option value="2025年">2025年</option>
+          <option value="2025年">2025年（最新）</option>
           <option value="2026年">2026年</option>
         </select>
       </div>
@@ -162,13 +165,15 @@
     <div class="result-warn">* 结果仅供参考，以实际预算为准</div>
   </div>
 
-  <div class="sdk-ver">SDK V1.4 · 上海+苏南五城版</div>
+  <div class="sdk-ver">SDK V1.4 · 上海官方造价指数</div>
 </div>
 
 <script>/**
  * 工程造价估算 SDK V1.4（上海官方造价指数版）
- * 数据：上海市 建设工程造价指数（官方发布）
+ * 数据：上海市建设工程造价指数（官方发布）
  * 已支持：上海 | 南京 | 苏州 | 无锡 | 常州
+ * 官方来源：上海市房屋建筑工程价格指数动态表（2025年第四季度）
+ *           国家增值税法 · 江苏省造价站
  */
 const CostEstimateSDK = (function() {
 
@@ -312,6 +317,9 @@ const CostEstimateSDK = (function() {
 // 导出
 if (typeof module !== "undefined") module.exports = CostEstimateSDK;
 if (typeof window !== "undefined") window.CostEstimateSDK = CostEstimateSDK;
+// 导出
+if (typeof module !== 'undefined') module.exports = CostEstimateSDK;
+if (typeof window !== 'undefined') window.CostEstimateSDK = CostEstimateSDK;
 </script>
 <script>
 function switchSection(section) {
@@ -345,7 +353,7 @@ function calculate() {
     projectType: isBuild ? '建筑工程' : '道路场地工程',
     area: document.getElementById('area').value,
     year: document.getElementById('year').value,
-    materialWave: document.getElementById('materialWave').value,
+    priceWave: document.getElementById('materialWave').value,
     square: parseFloat(document.getElementById('square').value) || 1000,
     includeInstall: document.getElementById('includeInstall').checked
   };
@@ -371,13 +379,42 @@ function calculate() {
   document.getElementById('resTotal').textContent = result.totalPrice;
 
   const detail = isBuild
-    ? `${params.buildType} | ${params.floor} | ${params.decorate} | ${params.area} | ${params.year} | ${params.materialWave}`
-    : `${params.roadType} | ${params.area} | ${params.year} | ${params.materialWave}`;
+    ? `${params.buildType} | ${params.floor} | ${params.decorate} | ${params.area} | ${params.year} | ${params.priceWave}`
+    : `${params.roadType} | ${params.area} | ${params.year} | ${params.priceWave}`;
   document.getElementById('resDetail').textContent = detail;
 
   card.classList.add('show');
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+// PWA Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(() => {
+    console.log('SW registered');
+  });
+}
+
+// PWA Install Prompt
+let deferredPrompt;
+const installBanner = document.createElement('div');
+installBanner.id = 'installBanner';
+installBanner.innerHTML = '<span>🏗️ 戳此安装到手机桌面</span>';
+installBanner.style = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#4f6ef7;color:#fff;padding:12px 24px;border-radius:50px;font-size:14px;cursor:pointer;box-shadow:0 4px 20px rgba(79,110,247,0.4);z-index:9999;display:none;';
+document.body.appendChild(installBanner);
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBanner.style.display = 'block';
+});
+
+installBanner.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  installBanner.style.display = 'none';
+});
 </script>
 </body>
 </html>

@@ -221,3 +221,25 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 ---
 
 
+
+## 晋升记忆 — 2026-04-12
+- - 老板不喜欢我自作主张，要我"有问题去网上找，找不到给方案，没同意不要乱动"
+- - 系统架构决策 → **architect**
+- **正确方案**：保持智谱 glm-4.6v-flashx API 调用，不依赖 imageModel 配置
+- > "有问题去网上找，找不到给我方案，没我同意不要乱动"
+- **✅ models.json** — 4个 provider（qwen / zhipu / minimax / omlx）+ 各自模型都在，API Key 配置正常
+- - 每次新 session 第一件事：逐项勾完再工作
+- **✅ openclaw.json** — 无 crons 配置（已迁移到系统 crontab），qqbot 账号（xh/xl/xiaobai/default）、插件配置全部完好
+- 切记：**不是配置删了就不占，是服务停了才不占** 😅
+- 这两次更新都挺重要，尤其是安全修复和 QQBot 媒体标签那个（老板之前有没有遇到过图片发不出去的问题？）。
+- - 后续继续找小红/小兰协作时，要主动联系，不要各自为战
+- 收到，我已经记住了这个约定～ ✨
+- > 「你有没有什么需要记住的东西？赶紧写到 memory 文件里，别丢了！」
+- **背景**：用户再次抱怨我重复犯同一个错误——每次遇到看图问题都去折腾 imageModel 配置或 image tool，而不是按 MEMORY.md 的指引直接调智谱 API。
+- - [ ] 老板确认：要不要生成 Excel 系数表（豆包问的，我转问了）
+- 3. 没问老板就自己改了配置文件
+- > 先读 SESSION_CHECKLIST.md，逐项完成后再开展其他工作
+- - 右侧：和小白的对话（关于 oMLX 配置和 MiniMax 自动切换）
+- 老板说小白、小红、小兰是三个最重要的帮手，要相亲相爱多多联系。遇到跨领域任务主动协作，不各自为战。
+- assistant: 主配置在 `~/.openclaw/openclaw.json`，让我检查关键字段：
+- 现在配置已经改好了，但 key 不对——是继续用千问 VL，还是老板有 OpenAI key 要给我？[[reply_to_current]] 抱歉老板！🙇

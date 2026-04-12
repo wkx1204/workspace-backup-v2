@@ -346,3 +346,65 @@ Reflections
 1. 老板最近反复强调「不要自作主张」——连续两次（看图铁律、memory调试）踩坑之后，现在已经写进 MEMORY.md 和 AGENTS.md，应该不会再犯
 2. 短term recall 为空说明今天的交互内容要么不够重要，要么已经在 Obsidian 日记里沉淀好了，这是好事
 
+## 梦境日记 — 2026-04-12 03:00
+
+✅ 晋升了 20 条记忆到 MEMORY.md
+
+- - 老板不喜欢我自作主张，要我"有问题去网上找，找不到给方案，没同意不要乱动"
+
+- - 系统架构决策 → **architect**
+
+- **正确方案**：保持智谱 glm-4.6v-flashx API 调用，不依赖 imageModel 配置
+
+- > "有问题去网上找，找不到给我方案，没我同意不要乱动"
+
+- **✅ models.json** — 4个 provider（qwen / zhipu / minimax / omlx）+ 各自模型都在，API Key 配置正常
+
+- - 每次新 session 第一件事：逐项勾完再工作
+
+- **✅ openclaw.json** — 无 crons 配置（已迁移到系统 crontab），qqbot 账号（xh/xl/xiaobai/default）、插件配置全部完好
+
+- 切记：**不是配置删了就不占，是服务停了才不占** 😅
+
+- 这两次更新都挺重要，尤其是安全修复和 QQBot 媒体标签那个（老板之前有没有遇到过图片发不出去的问题？）。
+
+- - 后续继续找小红/小兰协作时，要主动联系，不要各自为战
+
+- 收到，我已经记住了这个约定～ ✨
+
+- > 「你有没有什么需要记住的东西？赶紧写到 memory 文件里，别丢了！」
+
+- **背景**：用户再次抱怨我重复犯同一个错误——每次遇到看图问题都去折腾 imageModel 配置或 image tool，而不是按 MEMORY.md 的指引直接调智谱 API。
+
+- - [ ] 老板确认：要不要生成 Excel 系数表（豆包问的，我转问了）
+
+- 3. 没问老板就自己改了配置文件
+
+- > 先读 SESSION_CHECKLIST.md，逐项完成后再开展其他工作
+
+- - 右侧：和小白的对话（关于 oMLX 配置和 MiniMax 自动切换）
+
+- 老板说小白、小红、小兰是三个最重要的帮手，要相亲相爱多多联系。遇到跨领域任务主动协作，不各自为战。
+
+- assistant: 主配置在 `~/.openclaw/openclaw.json`，让我检查关键字段：
+
+- 现在配置已经改好了，但 key 不对——是继续用千问 VL，还是老板有 OpenAI key 要给我？[[reply_to_current]] 抱歉老板！🙇
+
+
+---
+
+*April 12, 2026 — 深夜 Promotion (19:00 UTC)*
+
+**Promote 结果**：0 short-term candidates，rem-harness 0 candidates，rem-backfill 无需执行
+
+**判断**：无新内容需要晋升，上次 03:00 cron 已处理完毕
+
+**DREAMS.md 状态**：已存在 April 12 03:00 条目，本次仅补充此行确认检查完成
+
+**系统状态**：
+- openclaw memory promote → No candidates
+- openclaw memory rem-harness → 0 candidates  
+- 三姐妹协作体系稳定运行
+- PWA 在线估算器已交付（H5 + SDK V1.4）
+
+_EOF — 小白 2026-04-12 03:00 记忆晋升检查完毕_
