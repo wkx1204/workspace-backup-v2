@@ -243,3 +243,71 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 - 老板说小白、小红、小兰是三个最重要的帮手，要相亲相爱多多联系。遇到跨领域任务主动协作，不各自为战。
 - assistant: 主配置在 `~/.openclaw/openclaw.json`，让我检查关键字段：
 - 现在配置已经改好了，但 key 不对——是继续用千问 VL，还是老板有 OpenAI key 要给我？[[reply_to_current]] 抱歉老板！🙇
+
+## 晋升记忆 — 2026-04-13
+- - JSON 配置文件修改是**高敏感操作**，默认禁止，必须老板明确批准
+- **老板指示**：千问做的版本，先本地运行看看，不要上传。
+- **✅ auth-profiles.json** — OpenAI + Google 默认配置，未被改动
+- **事件**：老板说第一版网页"错误的"，让我先不要上传。
+- assistant: 基础配置正常。让我继续检查 qqbot、cron、和 identity 配置：
+- **教训**：老板电脑里有数据（Obsidian Vault），不要舍近求远去网上搜！
+- assistant: 删掉了。现在重启 Gateway 让配置生效：
+- **🔒 安全修复（重要）：**
+- **老板原话：** "有问题去网上找，找不到给我方案，没我同意不要乱动"
+- ### 2. AGENTS.md（工作规范）— 新增3块
+- assistant: qqbot 配置正常。现在检查 cron jobs 和 auth-profiles：
+- 1. 要不要去南京造价站找真实案例对照？
+- - oMLX Model Type = VLM 配置**已生效**
+- - ✅ "新话题"快捷指令协议已记住
+- assistant: Gateway 在跑（PID 15200）。问题是没有开机自启。让我查一下 plist 配置：
+
+---
+
+## 晋升记忆 — 2026-04-13（补充）
+
+### 苏沪造价速算项目（重要项目入库）
+- **目标**：基于南京基准造价指数，估算苏南五市+上海的建筑工程造价
+- **GitHub Pages**：https://wkx1204.github.io/cost-app/（国外访问）
+- **Cloudflare Pages**：https://cost-app.pages.dev/（国内访问，推荐）
+- **GitHub repo**：wkx1204/cost-app
+- **本地 clone**：~/code/cost-app/
+- **核心数据**（南京基准）：普通住宅 1800 / 厂房 1270 / 办公楼 2650 / 道路 275（元/㎡）
+- **城市系数**：上海×1.04 / 苏州×0.98 / 无锡×0.96 / 常州×0.94 / 镇江×0.92
+- **更新命令**：`wrangler pages deploy ~/code/cost-app --project-name=cost-app`
+
+### Cloudflare Pages 永久部署（2026-04-13 02:20）
+- **永久 URL**：https://cost-app.pages.dev/
+- **部署命令**：`wrangler pages deploy <目录> --project-name=<项目名>`
+- **项目创建**：`wrangler pages project create <项目名>`
+- **wrangler login**：浏览器 OAuth 授权
+- **账号 ID**：55c10c7c1070f275969a2b23241946d2
+- **Dashboard**：https://dash.cloudflare.com/55c10c7c1070f275969a2b23241946d2
+- **git-credential-store**：存有 GitHub token，HTTPS push 不依赖 SSH key
+
+### 版本命名规范（重要教训）
+- **开发版本**：用日期时间戳（如 `20260413-0154.html`），不发正式版本号
+- **正式版**：等老板确认后给正式版本号再部署
+- **教训**：V1.6→V1.9→V1.10→V1.17→V1.9，版本号乱跳，容易混淆
+
+### 发版前完整检查规范（V1.8 教训）
+- **触发**：任何老板可见的改动，发出去之前必须完整测试一遍
+- **检查项**：表单联动、默认值、UI文案、版本号、输入项完整性
+- **V1.8 翻车**：加了版本号但把"项目年份"下拉选择器弄丢了，被狠批
+
+### UI 默认状态规范（V1.16 教训）
+- **原则**：默认状态必须在 HTML 里可见，不能全靠 JS 撑
+- **教训**：V1.15 的装修说明初始是空字符串，依赖 window.onload 填充，导致页面打开时一片空白
+- **正确做法**：HTML 里直接写默认内容，JS 只做后续更新
+
+### 网络操作规范
+- **clone 前**：先确认文件在本地，再用网络命令
+- **教训**：git clone 超时（网络问题），后来改用 /tmp/ 下的本地文件
+- **/tmp 保留**：正式确认部署成功前，保留最新版本在 /tmp/
+
+### 六城市造价数据全面造假（2026-04-12 重大发现）
+- **南京**：网站正常，8/8 编号查不到
+- **镇江**：域名不存在
+- **苏州/无锡/常州**：网站不通或停用
+- **上海**："沪造价XXXX-XXX"格式本身不存在于官方文件
+- **结论**：48个编号全部确认为造假（豆包体系性虚构）
+- **老板指令**：暂停造价核实任务
