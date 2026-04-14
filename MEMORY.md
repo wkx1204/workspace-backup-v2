@@ -278,6 +278,32 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 ### Cloudflare Pages 永久部署（2026-04-13 02:20）
 - **永久 URL**：https://cost-app.pages.dev/
 - **部署命令**：`wrangler pages deploy <目录> --project-name=<项目名>`
+
+### 六城市造价数据造假实锤（2026-04-12）
+- **48个编号全部造假**：南京(正常访问但查不到) / 镇江(域名不存在) / 苏州(查无此编号) / 无锡(网站无法访问) / 常州(网站已停用) / 上海(编号格式虚构)
+- 上海"沪造价XXXX-XXX"格式在上海官方文件中根本不存在
+- 老板指令：暂停造价核实任务
+- Boss 在 webchat 转发豆包分析：老板在收集各方意见
+
+### V1.9 价格区间功能（2026-04-13 10:22）
+- 老板要求：最终价格改为区间（中心价±5%，等比例）
+- 装修和波动越大，绝对差值越大（不是加死数）
+- 逻辑：低价=中心单价×0.95，高价=中心单价×1.05
+- 已部署 Cloudflare Pages + GitHub Pages
+
+### "不许自说自话"原则（2026-04-13 10:22 新增）
+- 老板原话："不许自说自话"
+- 所有外部操作（部署/推送/发送）必须先汇报确认
+- 不能因为觉得"逻辑对"就直接动
+
+### QQ二维码发送问题（2026-04-13 10:32-10:35）
+- 老板多次反映看不到 QR 码图片
+- 换用 Python qrcode 库生成 300x300 PNG
+- 问题未完全解决，待找稳定发送方式
+
+### Boss 核心原则强化（2026-04-12 教训）
+- Boss 电脑里有数据（Obsidian Vault），不要舍近求远去网上搜
+- 数据位置：~/Documents/Obsidian Vault/2-resource/建筑工程造价/
 - **项目创建**：`wrangler pages project create <项目名>`
 - **wrangler login**：浏览器 OAuth 授权
 - **账号 ID**：55c10c7c1070f275969a2b23241946d2
@@ -311,3 +337,16 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 - **上海**："沪造价XXXX-XXX"格式本身不存在于官方文件
 - **结论**：48个编号全部确认为造假（豆包体系性虚构）
 - **老板指令**：暂停造价核实任务
+
+## 晋升记忆 — 2026-04-14
+- - subagent 工作流哲学（/btw 命令限制）
+- - 平时不要主动跑 update/self-update 命令
+- ## 老板新增工作原则（2026-04-10 确认，02:02 再确认）
+- - **每次改版完整性检查** — V1.8 翻车后养成习惯，不再丢功能
+- - 插件配置：需把 `memory-core` 加入 `plugins.allow` 才能启用 dreaming
+- - 左侧菜单完整结构：聊天（红）、代理（折叠+展开）、配置（展开）、设置（折叠）等
+- assistant: 老板说 gateway 不能自启。让我检查 LaunchAgent 配置和状态。
+- assistant: 好，我检查一下配置有没有被更新改掉。主要是这几个文件：
+- 这四条原则以后就是小白的默认工作方式了。改完收工，不啰嗦 ✨
+- 之前的问题是旧的手动启动进程（14829）还占着端口，launchd 的新进程虽然注册了但实际不工作。杀了旧进程就好了。
+- ### OpenClaw 4.9 Dreaming 功能踩坑（重要教训）

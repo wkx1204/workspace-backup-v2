@@ -36,6 +36,10 @@
     "crawl4ai": {
       "version": "1.0.0",
       "installedAt": 1775405460879
+    },
+    "web-scraping": {
+      "version": "1.0.0",
+      "installedAt": 1776170282458
     }
   }
 }
