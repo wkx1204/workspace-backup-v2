@@ -316,4 +316,47 @@ grep -Eq "STATUS:?\s*(PLANNING_)?COMPLETE" IMPLEMENTATION_PLAN.md
 
 ---
 
+<!-- clawflows:start -->
+## ClawFlows
+
+Workflows from `/Users/wf/.openclaw/workspace/clawflows/`。当用户请求匹配到某个 workflow 时，读取其 WORKFLOW.md 并按步骤执行。
+
+### CLI 命令
+- `clawflows list` — 查看所有 workflows
+- `clawflows list enabled` — 只看已启用的
+- `clawflows list available` — 只看可用的
+- `clawflows enable <name>` — 启用一个 workflow
+- `clawflows disable <name>` — 停用一个 workflow
+- `clawflows run <name>` — 立即运行
+- `clawflows logs [name] [date]` — 查看运行日志
+- `clawflows create` — 创建自定义 workflow（交互式）
+- `clawflows edit <name>` — 复制社区 workflow 到 custom/ 再编辑
+- `clawflows open <name>` — 在编辑器中打开
+- `clawflows validate <name>` — 检查 workflow 是否有必需字段
+- `clawflows submit <name>` — 提交到社区审核
+- `clawflows share <name>` — 生成可分享的文本
+- `clawflows import <url>` — 从 URL 安装 workflow
+- `clawflows update` — 拉取最新社区 workflows
+- `clawflows sync-agent` — 刷新 AGENTS.md 中的 workflow 列表
+
+### What Users Say → What To Do
+| 用户说 | 我做 |
+|---|---|
+| "运行早报" | `clawflows run send-morning-briefing` |
+| "有哪些 workflow？" | `clawflows list enabled` |
+| "还有什么可用？" | `clawflows list available` |
+| "开启睡眠模式" | `clawflows run activate-sleep-mode` |
+| "做一个 workflow" | `clawflows create` |
+| "更新 workflows" | `clawflows update` |
+
+### Workflow 存放位置
+- **社区 workflows:** `/Users/wf/.openclaw/workspace/clawflows/workflows/available/community/`
+- **自定义 workflows:** `/Users/wf/.openclaw/workspace/clawflows/workflows/available/custom/`
+- **已启用 workflows:** `/Users/wf/.openclaw/workspace/clawflows/workflows/enabled/`（符号链接）
+- 每个 workflow 有个 `WORKFLOW.md`，运行前先读它
+
+### Enabled Workflows
+- **update-clawflows** (1am): 拉取最新 ClawFlows 并通知更新 → `/Users/wf/.openclaw/workspace/clawflows/workflows/enabled/update-clawflows//WORKFLOW.md`
+<!-- clawflows:end -->
+
 _本文件随 AGENTS.md 更新。小白主脑维护。_

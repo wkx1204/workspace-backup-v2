@@ -350,3 +350,50 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 - 这四条原则以后就是小白的默认工作方式了。改完收工，不啰嗦 ✨
 - 之前的问题是旧的手动启动进程（14829）还占着端口，launchd 的新进程虽然注册了但实际不工作。杀了旧进程就好了。
 - ### OpenClaw 4.9 Dreaming 功能踩坑（重要教训）
+- **婷婷 TTS（本地 macOS）**：老板确认改用婷婷本地语音，小红/小兰不动
+  - 脚本：`~/.openclaw/workspace-main/scripts/tts_tingting.sh`
+  - 改的 cron：minimax续费提醒（4月20日），从千问云端 Mia 改为本地婷婷
+
+## 晋升记忆 — 2026-04-15
+- ## 重要：老板的纠正（17:03）
+- ### 老板新增工作原则（再次确认）
+- - OpenClaw 配置 `tools.media.image.enabled: true` ✅ 正常
+- 如果你需要我**创建具体的 subagent 配置文件**（比如给小白写一个 `planner` 小弟的 prompt），我可以现在就做。要吗？
+- assistant: plist 配置正确（RunAtLoad=true, KeepAlive=true），问题是之前没加载。刚手动 `launchctl load` 已启动。
+- - **配置检查**：全部完好，版本更新未改动任何用户配置
+- - automemory 系统决策
+- - **回滚备份**：`~/.openclaw/openclaw.json.bak.manual`（手动备份，包含旧配置）
+- 不要问了，等老板主动告知答案，或者自己抓包看 web UI 实际发的什么
+- - Candidate: User: Sender (untrusted metadata): ```json { "label": "openclaw-control-ui", "id": "openclaw-control-ui" } ``` [Sun 2026-04-12 19:54 GMT+8] 你去上面这些城市的工程造价网站抓取数据呀，就像抓南京的数据这样，不要走外网代理，可以国内直连。
+- ## Boss 对我不满意（16:49-16:51）——重要教训
+
+## Promoted From Short-Term Memory (2026-04-15)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-04-07.md:6:6 -->
+- `/Users/wf/Desktop/截屏2026-04-07 15.20.07.png` [score=0.635 recalls=0 avg=0.620 source=memory/2026-04-07.md:6-6]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-07.md:28:28 -->
+- **Qwen3.5-9B-MLX-4bit 是纯文本模型，不能读图！** [score=0.635 recalls=0 avg=0.620 source=memory/2026-04-07.md:28-28]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-08.md:4:4 -->
+- 老板要求检测记忆系统冲突，发现： [score=0.629 recalls=0 avg=0.620 source=memory/2026-04-08.md:4-4]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-08.md:10:10 -->
+- **简化记忆体系，Obsidian 降级为参考资料库** [score=0.629 recalls=0 avg=0.620 source=memory/2026-04-08.md:10-10]
+
+## 晋升记忆 — 2026-04-15（续）
+
+### 数据获取关键发现
+
+**baostock 字段 bug**：query_history_k_data_plus 中包含 `pctTtm` 字段会导致所有股票返回0条。去掉后正常。
+
+**港股小米数据源**（腾讯财经，不需要代理）：
+- 接口：`https://proxy.finance.qq.com/ifzqgtimg/appstock/app/newfqkline/get?param=hk01810,day,2024-01-01,2026-04-15,2000,qfq`
+- 返回1914条历史（2018-07-09 ~ 2026-04-15）
+- 格式：`[日期, 开, 收, 高, 低, 成交量]`
+
+**AKShare SSL 问题**：macOS Python 3.9 用 LibreSSL 2.8.3，urllib3 v2 要求 OpenSSL 1.1.1+，降级 urllib3 到 v1 后 eastmoney/腾讯/新浪仍然不通（域名被墙或代理失效）。已验证可用的数据源：baostock（A股）、腾讯财经proxy（港股）
+
+**持仓数据文件**：
+- A股：`/tmp/xiaohong_adata_20260415.csv`（6只，10交易日）
+- 港股小米：`/tmp/xiaohong_xiaomi_20260415.csv`（1914条）
+- 共享路径：`/Volumes/XB_Home/小兰/xiaohong_*.csv`
+
+**小红 session**：sessions_send 持续超时，数据写共享路径让她自取
