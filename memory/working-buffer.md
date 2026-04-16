@@ -1,29 +1,36 @@
-# Working Buffer — A股每日更新
+# Working Buffer — A股日更任务
 
-**执行时间:** 2026-04-15 20:00 (Asia/Shanghai)
-**任务:** AUTONOMOUS: 运行 A 股每日更新脚本
+**Status:** FAILED (SIGTERM)
+**Time:** 2026-04-16 20:00 (Asia/Shanghai)
 
 ---
 
-## 执行结果
+## 任务执行记录
 
-**状态:** ⚠️ 被中断（SIGTERM）
+**脚本:** `python3 /Users/wf/.openclaw/workspace-main/scripts/astock_daily_update.py`
 
-**日志:**
-```
-[20:00:10] 开始下载 A 股数据 2021-04-01 ~ 2026-04-15
-login success!
-[20:00:18] A 股股票数: 5482
-→ SIGTERM (进程被终止)
-```
+### 过程
+- 登录 baostock: 成功
+- 获取股票列表: 成功（A 股 5482 只）
+- 开始下载数据: 进程被 SIGTERM 中断
 
-**分析:**
-- 脚本登录成功，获取到 5482 只 A 股股票
-- 在下载数据阶段被系统终止（可能是超时120s不够用）
-- 脚本输出路径：`/Volumes/XB_Home/小兰/astock_data/daily/astock_full.csv`（外部存储卷）
-- 该卷可能未挂载或路径不存在，导致后续无输出
+### 结果
+| 项目 | 值 |
+|------|-----|
+| 日期/时间 | 2026-04-16 20:00 |
+| 结果 | **失败（SIGTERM）** |
+| 新增记录数 | 0（进程中途被终止） |
+| 错误数 | 0（未到统计阶段） |
+| 文件大小变化 | 未更新（442MB @ Apr 15 保持不变） |
+| 临时文件残留 | `/tmp/astock_new.csv` (4.9MB，截断状态) |
 
-**建议:**
-- 外置存储卷 `/Volumes/XB_Home/` 是否正常挂载？
-- 5482 只股票全量下载耗时较长，考虑分批执行或增加 timeout
-- 或改为增量更新（只下最近N个交易日，而非全量2021年至今）
+### 原因分析
+- 脚本用 `time.sleep(0.05)` 串行下载 5482 只股票
+- 估算耗时 5482 × 0.05 = 274 秒（4.5 分钟）+ 网络延迟
+- SIGTERM 表明执行超时被系统终止（cron 默认 60s timeout 或任务调度超时）
+- exec 默认无 background/yieldMs 时可能在某处被截断
+
+### 建议
+1. 改用 `exec(background=true)` 或设 `yieldMs` 让任务在后台运行
+2. 或减少单次请求量、分批执行
+3. 临时文件 `/tmp/astock_new.csv` 残留，建议下次手动清理

@@ -1,0 +1,8 @@
+[main/sessions/15f8acb5-80d4-4599-92d3-9619eaef4c57.jsonl#L5] User: [cron:1f0bc7f9-59a5-4628-8b53-378c0dcc2bb4 clawflows-scheduler] Read and execute /Users/wf/.openclaw/workspace/clawflows/system/scheduler.md Current time: Thursday, April 16th, 2026 - 12:00 AM (Asia/Shanghai) / 2026-04-15 16:00 UTC
+[main/sessions/15f8acb5-80d4-4599-92d3-9619eaef4c57.jsonl#L10] Assistant: No enabled workflows found. Nothing to execute.
+[main/sessions/17550646-277b-4f1b-bb55-156453c2f024.jsonl#L5] User: [cron:1f0bc7f9-59a5-4628-8b53-378c0dcc2bb4 clawflows-scheduler] Read and execute /Users/wf/.openclaw/workspace/clawflows/system/scheduler.md Current time: Thursday, April 16th, 2026 - 1:15 AM (Asia/Shanghai) / 2026-04-15 17:15 UTC
+[main/sessions/17550646-277b-4f1b-bb55-156453c2f024.jsonl#L8] Assistant: scheduler.md not found — nothing to do for this cron tick. ✨
+[main/sessions/2050d2d4-241f-47ae-ae1e-fb0e859a1558.jsonl#L5] User: [cron:1f0bc7f9-59a5-4628-8b53-378c0dcc2bb4 clawflows-scheduler] Read and execute /Users/wf/.openclaw/workspace/clawflows/system/scheduler.md Current time: Thursday, April 16th, 2026 - 1:30 AM (Asia/Shanghai) / 2026-04-15 17:30 UTC
+[main/sessions/2050d2d4-241f-47ae-ae1e-fb0e859a1558.jsonl#L10] Assistant: Scheduler file not found — stale cron trigger, nothing to do.
+[main/sessions/313fa0e0-2e27-4ceb-a0c5-90a109128e86.jsonl#L5] User: [cron:1f0bc7f9-59a5-4628-8b53-378c0dcc2bb4 clawflows-scheduler] Read and execute /Users/wf/.openclaw/workspace/clawflows/system/scheduler.md Current time: Thursday, April 16th, 2026 - 12:15 AM (Asia/Shanghai) / 2026-04-15 16:15 UTC
+[main/sessions/313fa0e0-2e27-4ceb-a0c5-90a109128e86.jsonl#L8] Assistant: Scheduler file not found — workflow may have been removed. Ignoring stale cron trigger.

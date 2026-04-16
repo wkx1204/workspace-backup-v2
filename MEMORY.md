@@ -397,3 +397,11 @@ curl -X POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions 
 - 共享路径：`/Volumes/XB_Home/小兰/xiaohong_*.csv`
 
 **小红 session**：sessions_send 持续超时，数据写共享路径让她自取
+
+## 晋升记忆 — 2026-04-16
+- assistant: 看到了——`memorySearch` 配置里有 `provider`、`remote`、`model`，但没有 `enabled` 字段。最简单的方式是**直接把整个 memorySearch 配置删掉**，这样就不会走向量搜索了，完全降级到 grep 模式。
+- assistant: auth-profiles 正常（只有 OpenAI 和 Google 默认配置）。检查 .env 和 system crontab：
+- 等老板确认用哪个，我来完成配置
+- | ~02:22 | 二维码发到 QQ，老板确认"牢牢记住" |
+- **（更新 23:19）老板说：算了，不要装了。** Superpowers 安装取消。
+- - **手动备份已存在**：`~/.openclaw/openclaw.json.bak.manual`（包含旧配置，可回滚）
