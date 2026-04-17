@@ -1,0 +1,2 @@
+[main/sessions/04b67d8b-35ad-4d4d-bda1-4c1c92981c2f.jsonl#L5] User: [cron:1f0bc7f9-59a5-4628-8b53-378c0dcc2bb4 clawflows-scheduler] Read and execute /Users/wf/.openclaw/workspace/clawflows/system/scheduler.md Current time: Friday, April 17th, 2026 - 2:45 AM (Asia/Shanghai) / 2026-04-16 18:45 UTC
+[main/sessions/04b67d8b-35ad-4d4d-bda1-4c1c92981c2f.jsonl#L10] Assistant: ClawFlows 系统未安装，任务跳过。

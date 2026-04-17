@@ -1,0 +1,53 @@
+{
+  "halls": [
+    {
+      "hallId": "main",
+      "title": "Collaboration Hall",
+      "description": "The shared control-center group chat for task discussion, assignment, execution, and review.",
+      "participants": [
+        {
+          "participantId": "xl",
+          "agentId": "xl",
+          "displayName": "小兰",
+          "semanticRole": "coder",
+          "active": true,
+          "aliases": [
+            "小兰",
+            "xl"
+          ],
+          "isHuman": false
+        },
+        {
+          "participantId": "main",
+          "agentId": "main",
+          "displayName": "小白",
+          "semanticRole": "manager",
+          "active": true,
+          "aliases": [
+            "小白",
+            "main"
+          ],
+          "isHuman": false
+        },
+        {
+          "participantId": "xh",
+          "agentId": "xh",
+          "displayName": "小红",
+          "semanticRole": "planner",
+          "active": true,
+          "aliases": [
+            "小红",
+            "xh"
+          ],
+          "isHuman": false
+        }
+      ],
+      "taskCardIds": [],
+      "messageIds": [],
+      "createdAt": "2026-04-17T11:30:45.574Z",
+      "updatedAt": "2026-04-17T12:03:09.552Z"
+    }
+  ],
+  "executionLocks": [],
+  "updatedAt": "2026-04-17T12:03:09.572Z"
+}

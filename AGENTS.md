@@ -289,13 +289,67 @@ grep -Eq "STATUS:?\s*(PLANNING_)?COMPLETE" IMPLEMENTATION_PLAN.md
 
 ---
 
-## 十一、Session End — 记忆写入规则
+## 十一、三级记忆体系（强制执行）
+
+### 11.1 三层边界（绝对不能混）
+
+| 层级 | 文件 | 放什么 |
+|------|------|--------|
+| **长期** | MEMORY.md | 老板原则、核心配置、重要项目（≤8KB） |
+| **短期** | memory/YYYY-MM-DD.md | 每日 session 原始记录 |
+| **参考** | Obsidian Vault/memory/ | 外部知识、网页内容、项目文档 |
+
+### 11.2 MEMORY.md 更新规则（官方正确流程）
+
+**日常**：老板原则/配置变更 → **立即写入**，不等任何机制
+
+**心跳维护**（每几天一次）：
+1. 读最近 3-5 天的 memory/DD.md
+2. 提炼值得长期保留的内容（决策、教训、发现）
+3. 手动更新 MEMORY.md（删旧补新，保持 ≤8KB）
+
+**Session 结束**：
+- 老板说"新话题"/"结束话题"时
+- 检查 MEMORY.md 有无需要更新的内容
+- 有则立即更新，不全量复制 daily memory
+
+**禁止**：全量晋升 promotion，把 daily memory 整个复制进 MEMORY.md。
+
+### 11.3 daily memory 写入规则
+
+session 结束时，写入 memory/DD.md 的内容：
+
+| 写 | 不写 |
+|----|------|
+| 决策结论 | 对话过程 |
+| 老板纠正 | assistant 日志 |
+| 重要发现 | promotion block 本身 |
+| 项目状态变更 | 老板闲聊/废话 |
+
+### 11.4 WAL 触发立即写入
+
+老板纠正我的那一刻 → **立即写入 MEMORY.md 或 .learnings/LEARNINGS.md**
+不许等晋升，不许"回头再写"，不许塞 working buffer 就忘。
+
+### 11.5 MEMORY.md 硬上限执行
+
+**写入前检查大小**，超过 8KB 必须删除旧内容才能新增。
+
+**删除优先级**：先删晋升记忆 → 再合并 → 最后删
+**固定技能配置（身份/系统/工具）永不删除**
+
+**容量分配**：固定技能 ≤4KB | 老板原则 ≤2KB | 晋升记忆 ≤2KB
+
+---
+
+## 十二、Session End — 记忆写入规则
 
 每次对话告一段落，自问：
 
-1. **有新决策/配置变更？** → 写入 MEMORY.md 或 Obsidian
+1. **有新决策/配置变更？** → 立即写入对应层级（不等晋升）
 2. **被老板纠正了什么？** → 实时写入 `.learnings/LEARNINGS.md`
 3. **老板有新偏好/指令？** → 评估是否需要更新 SOUL.md/USER.md
+4. **MEMORY.md 是否超过 8KB？** → 超过立即清理
 
 ---
 
