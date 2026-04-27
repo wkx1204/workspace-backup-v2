@@ -62,7 +62,7 @@ Add whatever helps you do your job. This is your cheat sheet.
 **1. AppleScript（无需 opencli）**
 ```bash
 # 获取 Chrome 当前标签页 URL
-grep osascript -e 'tell application "Google Chrome" to return URL of active tab of front window'
+osascript -e 'tell application "Google Chrome" to return URL of active tab of front window'
 ```
 - 无需 opencli 扩展
 - 只适合获取 URL / 标题等简单信息
